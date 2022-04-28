@@ -1,7 +1,7 @@
 import requests
 import json
 from flask import Flask
-
+import datetime
 
 def get_valutes_list():
     url = 'https://www.cbr-xml-daily.ru/daily_json.js'
@@ -15,7 +15,10 @@ app = Flask(__name__)
 
 
 def create_html(valutes):
+    now = datetime.datetime.now()
+    s_strftime = now.strftime("%d-%m-%Y %H:%M")
     text = '<h1>Курс валют</h1>'
+    text += '<h2> на: ' + s_strftime + '</h2>'
     text += '<table>'
     text += '<tr>'
     for _ in valutes[0]:
